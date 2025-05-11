@@ -6,13 +6,18 @@ include('config.php');
 
 
 try {
-    file_put_contents('log_post.txt', print_r($_POST, true));
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) {
         if ($_POST['action'] == 'register') {
             $name = $_POST['name'];
             $email = $_POST['email'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
+            $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
+$stmt->execute([$email]);
+if ($stmt->fetch()) {
+    echo json_encode(['success' => false, 'message' => 'Este e-mail já está cadastrado.']);
+    exit;
+}
             // Adicionando dados na tabela usuarios
             $stmt = $pdo->prepare("INSERT INTO usuarios (nome_completo, email, senha) VALUES (?, ?, ?)");
             $stmt->execute([$name, $email, $password]);
@@ -24,7 +29,7 @@ try {
             $password = $_POST['password'];
 
             $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
-            $stmt->execute([$email]);
+            $stmt->execute([$email]);            
             $user = $stmt->fetch();
             if ($user && password_verify($password, $user['senha'])) {
                 $_SESSION['user_id'] = $user['id'];
@@ -40,8 +45,8 @@ try {
             $fields = [];
 
             // Verifica quais campos chegaram para edição
-            if (!empty($_POST['name'])) {
-                $fields['name'] = $_POST['name'];
+            if (!empty($_POST['nome_completo'])) {
+                $fields['nome_completo'] = $_POST['nome_completo'];
             }
 
             if (!empty($_POST['telefone'])) {
@@ -52,8 +57,8 @@ try {
                 $fields['cpf'] = $_POST['cpf'];
             }
 
-            if (!empty($_POST['profissao'])) {
-                $fields['profissao'] = $_POST['profissao'];
+            if (!empty($_POST['empresa'])) {
+                $fields['empresa'] = $_POST['empresa'];
             }
 
             if (!empty($_POST['endereco'])) {
@@ -73,6 +78,7 @@ try {
 
                 $stmt = $pdo->prepare("UPDATE usuarios SET " . implode(', ', $set) . " WHERE id = ?");
                 $stmt->execute($values);
+                header('Content-Type: application/json');
                 echo json_encode(['success' => true, 'message' => 'Perfil atualizado com sucesso!']);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Nenhum campo foi atualizado.']);

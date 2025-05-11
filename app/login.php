@@ -65,6 +65,8 @@
           <p class="text-center small-text mt-3">
             Ainda não tem conta? <a href="create.php"><strong class="text-blue fw-semibold">Crie uma agora</strong></a>
           </p>
+
+          <div class="mt-3" id="message_container"></div>
         </main>
 
         <footer class="fw-bold text-dark">
@@ -81,34 +83,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="scripts.js?v=1.0.3"></script>
-  <script>
-    const senhaInput = document.getElementById('senha');
-    const toggleIcon = document.getElementById('toggleSenha');
-
-    toggleIcon.addEventListener('click', () => {
-      const isHidden = senhaInput.type === 'password';
-      senhaInput.type = isHidden ? 'text' : 'password';
-      toggleIcon.textContent = isHidden ? 'visibility' : 'visibility_off';
-    });
-
-    toggleIcon.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        toggleIcon.click();
-      }
-    });
-
-    document.getElementById('form_login').addEventListener('submit', function (e) {
-      const senha = senhaInput.value;
-      const erroEl = document.getElementById('senhaErro');
-
-      if (senha.length < 8) {
-        e.preventDefault();
-        erroEl.classList.remove('d-none');
-      } else {
-        erroEl.classList.add('d-none');
-      }
-    });
-  </script>
-
 </body>
 </html>

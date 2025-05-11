@@ -69,11 +69,11 @@ $user = $stmt->fetch();
           photo_camera
         </span>
       </div>
-      <h4 class="name-dashboard mt-3 mb-0">
+      <h4 class="name-dashboard mt-3 mb-0" id="display_name">
         <?php echo htmlspecialchars($user['nome_completo'] ?? 'Nome do Usuário'); ?>
       </h4>
-      <p class="subtitle-dashboard">
-        <?php echo htmlspecialchars($user['profissao'] ?? 'Profissão'); ?>
+      <p class="subtitle-dashboard" id="display_empresa">
+        <?php echo htmlspecialchars($user['empresa'] ?? 'Empresa não cadastrada'); ?>
       </p>
     </div>
 
@@ -91,7 +91,7 @@ $user = $stmt->fetch();
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" name="email"
                  placeholder="Digite seu email"
-                 value="<?php echo htmlspecialchars($user['email'] ?? '') ?>">
+                 value="<?php echo htmlspecialchars($user['email'] ?? '') ?>" readonly>
         </div>
 
         <div class="col-md-6">
@@ -109,10 +109,10 @@ $user = $stmt->fetch();
         </div>
 
         <div class="col-md-6">
-          <label for="profissao" class="form-label">Empresa</label>
-          <input type="text" class="form-control" id="profissao" name="profissao"
+          <label for="empresa" class="form-label">Empresa</label>
+          <input type="text" class="form-control" id="empresa" name="empresa"
                  placeholder="Digite sua empresa"
-                 value="<?php echo htmlspecialchars($user['profissao'] ?? '') ?>">
+                 value="<?php echo htmlspecialchars($user['empresa'] ?? '') ?>">
         </div>
 
         <div class="col-md-6">
@@ -126,6 +126,7 @@ $user = $stmt->fetch();
       <div class="mt-4 text-center">
         <button type="submit" class="btn btn-primary">Atualizar cadastro</button>
       </div>
+      <div class="mt-3" id="message_container"></div>
     </form>
   </div>
 
@@ -134,60 +135,5 @@ $user = $stmt->fetch();
   <script src="scripts.js?v=1.0.3"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </body>
-
-
-<script>
-  $(document).ready(function() {
-    $('#telefone').mask('(00) 00000-0000');
-    $('#cpf').mask('000.000.000-00');
-  });
-</script>
-<script>
-  $(document).ready(function () {
-  // Logout (já existente)
-  $("#logout-link").on("click", function (e) {
-    e.preventDefault();
-
-    $.ajax({
-      url: "logout.php",
-      type: "POST",
-      success: function () {
-        window.location.href = "login.php";
-      },
-      error: function () {
-        alert("Erro ao tentar fazer logout.");
-      },
-    });
-  });
-
-  // Deletar conta
-  $("#delete-account").on("click", function (e) {
-    e.preventDefault();
-
-    if (!confirm("Tem certeza que deseja deletar sua conta? Essa ação é irreversível.")) {
-      return;
-    }
-
-    $.ajax({
-      url: "functions.php", 
-      type: "POST",
-      data: { action: "delete" },
-      dataType: "json",
-      success: function (response) {
-        if (response.success) {
-          alert("Sua conta foi deletada com sucesso.");
-          window.location.href = "login.php";
-        } else {
-          alert(response.message || "Erro ao tentar deletar a conta.");
-        }
-      },
-      error: function () {
-        alert("Erro ao tentar deletar a conta.");
-      },
-    });
-  });
-});
-
-</script>
 
 </html>

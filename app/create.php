@@ -57,7 +57,6 @@
               <span id="toggleSenha" class="material-icons input-icon">visibility_off</span>
             </div>
             <div class="form-hint mb-2">Inserir mais de 8 caracteres</div>
-            <div id="senhaErro" class="form-error d-none mb-2 text-danger">A senha deve ter pelo menos 8 caracteres.</div>
 
             <button type="submit" class="btn btn-primary w-100">Criar Conta</button>
           </form>
@@ -65,6 +64,7 @@
           <p class="login-link-text mt-3">
             Já tem uma conta? <a href="login.php">Faça login</a>
           </p>
+          <div class="mt-3" id="message_container"></div>
         </main>
 
         <footer></footer>
@@ -79,27 +79,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="scripts.js?v=1.0.3"></script>
-  <script>
-    const senhaInput = document.getElementById('senha');
-    const toggleIcon = document.getElementById('toggleSenha');
-
-    toggleIcon.addEventListener('click', () => {
-      const isHidden = senhaInput.type === 'password';
-      senhaInput.type = isHidden ? 'text' : 'password';
-      toggleIcon.textContent = isHidden ? 'visibility' : 'visibility_off';
-    });
-
-    document.getElementById('form_register').addEventListener('submit', function (e) {
-      const senha = senhaInput.value;
-      const erroEl = document.getElementById('senhaErro');
-
-      if (senha.length < 8) {
-        e.preventDefault();
-        erroEl.classList.remove('d-none');
-      } else {
-        erroEl.classList.add('d-none');
-      }
-    });
-  </script>
 </body>
 </html>
