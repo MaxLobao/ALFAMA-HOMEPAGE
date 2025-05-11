@@ -1,0 +1,181 @@
+/*==============================*/
+/* STRUCTURE - ALFAMA */
+/*==============================*/
+
+/* Base */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+main {
+  padding: 0 50px;
+}
+
+/* Typography */
+h1.text-start,
+.form-label,
+.text-start-title {
+  font-weight: 600;
+}
+
+.h1, h1 {
+  font-size: 3.5rem;
+}
+
+.h2, h2 {
+  font-size: 1.5rem;
+}
+
+.text-start-title {
+  color: #000;
+}
+
+.text-start {
+  color: #fff;
+}
+
+.small-text {
+  font-size: 14px;
+}
+
+.name-dashboard {
+  font-size: 14px;
+}
+
+.subtitle-dashboard {
+  font-size: 12px;
+}
+
+/* Form */
+.form-control,
+.form-error,
+.form-hint,
+.form-label {
+  font-size: 12px;
+}
+
+.form-error {
+  color: red;
+}
+
+.form-hint {
+  color: #6c757d;
+}
+
+/* Input icon */
+.input-icon {
+  position: absolute;
+  right: 16px;
+  top: 72%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+  font-size: 20px;
+  user-select: none;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #2A6F9E;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #245f88;
+  color: #fff;
+}
+
+/* Links */
+.login-link-text {
+  font-weight: bold;
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+}
+
+.login-link-text a {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link-text a:hover {
+  text-decoration: underline;
+}
+
+.nav-link.dropdown-toggle,
+.text-blue {
+  font-weight: bold;
+  color: #2A6F9E;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-link.dropdown-toggle:hover {
+  color: #245f88;
+}
+
+/* Cursor */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Dropdowns */
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
+/* Dashboard */
+.bg-nav-dashboard {
+  background-color: #245f88;
+  color: #fff;
+}
+
+/* Carousel */
+.carousel-item img {
+  object-fit: cover;
+}
+
+/*==============================*/
+/* MEDIA QUERIES */
+/*==============================*/
+
+/* Mobile */
+@media all and (max-width: 767px) { 
+  main {
+    padding: 40px !important;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  main {
+    padding: 40px 80px 40px 40px;
+  }
+}
+
+/* Large Screens */
+@media (min-width: 1200px) {
+  .h1, h1 {
+    font-size: 3.5rem;
+  }
+
+  .h2, h2 {
+    font-size: 1.5rem;
+  }
+}
