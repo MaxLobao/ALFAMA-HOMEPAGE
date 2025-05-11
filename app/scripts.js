@@ -118,3 +118,17 @@ function showAlert(type, message, duration = 3000) {
     alertElement.alert("close");
   }, duration);
 }
+
+$('#delete-user').on('click', function () {
+  if (confirm('Tem certeza que deseja deletar sua conta? Esta ação não poderá ser desfeita.')) {
+    $.post('auth.php', { action: 'delete' }, function(response) {
+      if (response.success) {
+        alert(response.message);
+        window.location.href = 'login.php';
+      } else {
+        alert('Erro: ' + response.message);
+      }
+    }, 'json');
+  }
+});
+

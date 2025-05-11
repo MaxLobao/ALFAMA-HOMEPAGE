@@ -1,6 +1,6 @@
 Array
 (
     [action] => login
-    [email] => max@max.com
-    [password] => max@max.com
+    [email] => 
+    [password] => sad
 )

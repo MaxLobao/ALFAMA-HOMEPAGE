@@ -44,20 +44,20 @@ try {
                 $fields['name'] = $_POST['name'];
             }
 
-            if (!empty($_POST['telephone'])) {
-                $fields['telephone'] = $_POST['telephone'];
+            if (!empty($_POST['telefone'])) {
+                $fields['telefone'] = $_POST['telefone'];
             }
 
             if (!empty($_POST['cpf'])) {
                 $fields['cpf'] = $_POST['cpf'];
             }
 
-            if (!empty($_POST['profession'])) {
-                $fields['profession'] = $_POST['profession'];
+            if (!empty($_POST['profissao'])) {
+                $fields['profissao'] = $_POST['profissao'];
             }
 
-            if (!empty($_POST['address'])) {
-                $fields['address'] = $_POST['address'];
+            if (!empty($_POST['endereco'])) {
+                $fields['endereco'] = $_POST['endereco'];
             }
 
             // Monta a query de forma dinâmica
@@ -78,6 +78,15 @@ try {
                 echo json_encode(['success' => false, 'message' => 'Nenhum campo foi atualizado.']);
             }
         }
+
+       if ($_POST['action'] == 'delete') {
+            $user_id = $_SESSION['user_id'];
+            $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = ?");
+            $stmt->execute([$user_id]);
+            session_destroy();
+            echo json_encode(['success' => true, 'message' => 'Usuário deletado com sucesso!']);
+        }
+
     } else {
         echo json_encode(['success' => false, 'message' => 'Requisição inválida.']);
     }
